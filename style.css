@@ -24,6 +24,11 @@ body {
   justify-content: center;
 }
 
+#noButton {
+  transition: left 0.3s ease, top 0.3s ease;
+}
+
+
 .cat-img {
   width: 100%;
   border-radius: 12px;
