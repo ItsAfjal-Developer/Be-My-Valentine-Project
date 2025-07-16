@@ -159,17 +159,34 @@
     }
 
     function makeNoRunaway() {
+      const container = document.querySelector(".container");
+
+      // Set the button to absolute position
       noButton.style.position = "absolute";
-      noButton.addEventListener("mouseenter", () => {
-        const container = document.querySelector(".container");
-        const maxX = container.offsetWidth - noButton.offsetWidth;
-        const maxY = container.offsetHeight - noButton.offsetHeight;
+
+      // Unified function to move the button
+      function moveButton() {
+        const containerRect = container.getBoundingClientRect();
+        const maxX = containerRect.width - noButton.offsetWidth;
+        const maxY = containerRect.height - noButton.offsetHeight;
+
         const randomX = Math.random() * maxX;
         const randomY = Math.random() * maxY;
+
         noButton.style.left = `${randomX}px`;
         noButton.style.top = `${randomY}px`;
+      }
+
+      // For desktop
+      noButton.addEventListener("mouseenter", moveButton);
+
+      // For mobile (touch)
+      noButton.addEventListener("touchstart", (e) => {
+        e.preventDefault(); // Prevents touch click
+        moveButton();
       });
     }
+
   </script>
 
 
