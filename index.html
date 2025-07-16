@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine Proposal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Protest+Riot&family=Inter:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="https://images.icon-icons.com/2134/PNG/96/heart_cute_emoji_emo_icon_131637.png">
+</head>
+
+<body>
+  <!-- ❤️ Floating Hearts -->
+  <div class="hearts">
+    <span style="left: 5%"></span>
+    <span style="left: 15%"></span>
+    <span style="left: 25%"></span>
+    <span style="left: 50%"></span>
+    <span style="left: 70%"></span>
+    <span style="left: 90%"></span>
+  </div>
+
+  <!-- 🎵 Background Music -->
+  <audio id="bg-music" autoplay loop>
+    <source src="music/bg-music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- 🎶 Final Yes Music -->
+  <audio id="yes-music">
+    <source src="music/yes-music.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+
+  <!-- 🔇 Mute Button -->
+  <button id="mute-btn" class="mute-btn">🔊</button>
+
+  <main class="container">
+    <img class="cat-img" src="img/cat-0.jpg" alt="Cute cat" />
+    <p class="title">Will You Be My Valentine?</p>
+    <p class="subtitle">You're the only one who makes my heart smile 🥹💕</p>
+
+    <div class="buttons">
+      <button type="button" class="btn btn--yes">Yes</button>
+      <button type="button" class="btn btn--no">No</button>
+    </div>
+  </main>
+  <script>
+    const titleElement = document.querySelector(".title");
+    const buttonsContainer = document.querySelector(".buttons");
+    const yesButton = document.querySelector(".btn--yes");
+    const noButton = document.querySelector(".btn--no");
+    const catImg = document.querySelector(".cat-img");
+
+    const bgMusic = document.getElementById("bg-music");
+    const yesMusic = document.getElementById("yes-music");
+    const muteBtn = document.getElementById("mute-btn");
+
+    let isMuted = false;
+    let musicStarted = false;
+    let heartInterval;
+
+    // Flag to skip bg music if first click is on "Yes"
+    let firstClickWasYes = false;
+
+    muteBtn.addEventListener("click", () => {
+      isMuted = !isMuted;
+      bgMusic.muted = isMuted;
+      yesMusic.muted = isMuted;
+      muteBtn.textContent = isMuted ? "🔇" : "🔊";
+    });
+
+    const MAX_IMAGES = 5;
+    let play = true;
+    let noCount = 0;
+
+    // ✅ YES BUTTON CLICK HANDLER
+    yesButton.addEventListener("click", () => {
+      firstClickWasYes = true; // set flag to skip bg music
+      musicStarted = true;     // prevent it from starting
+
+      titleElement.innerHTML = "Yayyy!! 💖";
+      buttonsContainer.classList.add("hidden");
+      catImg.src = "img/cat-yes.jpg";
+
+      // Stop bg music
+      bgMusic.pause();
+      bgMusic.currentTime = 0;
+
+      // Play Yes music
+      yesMusic.currentTime = 0;
+      yesMusic.play().catch((err) => {
+        console.warn("Yes music couldn't play:", err);
+      });
+
+      // Heart animation
+      heartInterval = setInterval(() => {
+        const heart = document.createElement("span");
+        heart.innerText = "💗";
+        heart.style.position = "absolute";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = Math.random() * 100 + "vh";
+        heart.style.fontSize = Math.random() * 30 + 10 + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+      }, 200);
+
+      yesMusic.addEventListener("ended", () => {
+        clearInterval(heartInterval);
+      });
+    });
+
+    // ✅ AUTOPLAY BG MUSIC AFTER FIRST INTERACTION (only if NOT clicked "Yes")
+    function startMusicOnInteraction(e) {
+      if (!musicStarted && !firstClickWasYes) {
+        bgMusic.play().catch((err) => {
+          console.warn("Autoplay blocked:", err);
+        });
+        musicStarted = true;
+      }
+    }
+
+    document.addEventListener("click", startMusicOnInteraction, { once: true });
+    document.addEventListener("keydown", startMusicOnInteraction, { once: true });
+
+    // NO BUTTON HANDLER
+    noButton.addEventListener("click", () => {
+      if (play) {
+        noCount++;
+        const imageIndex = Math.min(noCount, MAX_IMAGES);
+        catImg.src = `img/cat-${imageIndex}.jpg`;
+        resizeYesButton();
+        noButton.innerHTML = generateMessage(noCount);
+        if (noCount === MAX_IMAGES) {
+          play = false;
+          makeNoRunaway();
+        }
+      }
+    });
+
+    function resizeYesButton() {
+      const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+      yesButton.style.fontSize = `${currentSize * 1.4}px`;
+    }
+
+    function generateMessage(n) {
+      const messages = [
+        "No",
+        "Are you sure?",
+        "Babe Please 😢",
+        "Don't do this to me :(",
+        "You're breaking my heart 💔",
+        "I'm gonna cry..."
+      ];
+      return messages[Math.min(n, messages.length - 1)];
+    }
+
+    function makeNoRunaway() {
+      noButton.style.position = "absolute";
+      noButton.addEventListener("mouseenter", () => {
+        const container = document.querySelector(".container");
+        const maxX = container.offsetWidth - noButton.offsetWidth;
+        const maxY = container.offsetHeight - noButton.offsetHeight;
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+        noButton.style.left = `${randomX}px`;
+        noButton.style.top = `${randomY}px`;
+      });
+    }
+  </script>
+
+
+</body>
+
+</html>

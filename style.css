@@ -1,0 +1,186 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #ffeef2;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.container {
+  max-width: 500px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  justify-content: center;
+}
+
+.cat-img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  color: #e91e63;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn--yes {
+  background-color: #40c057;
+  color: white;
+}
+
+.btn--yes:hover {
+  background-color: #2f9e44;
+  transform: scale(1.1);
+}
+
+.btn--no {
+  background-color: #fa5252;
+  color: white;
+  position: relative;
+}
+
+.btn--no:hover {
+  background-color: #f03e3e;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 💖 Floating Hearts Background */
+.hearts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.floating-heart {
+  position: fixed;
+  animation: float-up 4s linear forwards;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+  .mute-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #fff;
+      border: 2px solid #ff69b4;
+      color: #ff69b4;
+      border-radius: 50%;
+      font-size: 20px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .mute-btn:hover {
+      background-color: #ff69b4;
+      color: #fff;
+    }
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+
+.hearts span {
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Love_Heart_SVG.svg/1024px-Love_Heart_SVG.svg.png")
+    no-repeat center;
+  background-size: contain;
+  animation: float 8s linear infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1.1);
+    opacity: 0;
+  }
+}
+
+.hearts span:nth-child(odd) {
+  animation-duration: 10s;
+}
+
+.hearts span:nth-child(even) {
+  animation-duration: 7s;
+}
+
+.hearts span:nth-child(3n) {
+  left: 30%;
+}
+
+.hearts span:nth-child(4n) {
+  left: 60%;
+}
+
+.hearts span:nth-child(5n) {
+  left: 80%;
+}
+
+.hearts span:nth-child(6n) {
+  left: 10%;
+}
+
+.hearts span:nth-child(7n) {
+  left: 45%;
+}
