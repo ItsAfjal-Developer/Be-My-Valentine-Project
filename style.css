@@ -22,7 +22,9 @@ body {
   position: relative;
   z-index: 1;
   justify-content: center;
+  overflow: hidden; 
 }
+
 
 #noButton {
   transition: left 0.3s ease, top 0.3s ease;
