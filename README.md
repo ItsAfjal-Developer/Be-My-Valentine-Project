@@ -36,4 +36,4 @@
 Below is a Preview of **Be My Valentine Project**, Showcasing the Layout and Styling implemented Using pure HTML , CSS and Javascript. 
 The Design focuses on Clean Structure, Responsiveness and Modern Styling.
 
-<img src="img/Screenshot.png" alt="NA-Sport-s-Academy-Website" width="100%" />
+<img src="img/Screenshot.png" alt="Be My Valentine Project" width="100%" />
