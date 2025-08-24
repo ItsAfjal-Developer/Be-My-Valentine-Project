@@ -1,5 +1,5 @@
 # **💌 Be My Valentine Project**
-- A Cute and Interactive Valentine’s Day Proposal Web Page featuring an Adorable Kitten Holding Flowers, A heartfelt
+A Cute and Interactive Valentine’s Day Proposal Web Page featuring an Adorable Kitten Holding Flowers, A heartfelt
   message and fun "Yes" / "No" buttons. Perfect for Sending a special surprise to Someone you Love!
   
 ## ✨ Features
